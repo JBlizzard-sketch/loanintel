@@ -1,0 +1,207 @@
+✅ COMPANY PROFILE (AI-OPTIMIZED for REALISTIC DATA GENERATION)
+
+Company Name: Kechita Microfinance Group (KMG)
+Industry: Microfinance → MSME working-capital loans
+Regions: 8 operational zones (Nairobi, Central, Coast, Eastern, Western, Rift Valley, Nyanza, North Eastern)
+Branches: ~100 branches nationwide
+Customers: 120,000+ active borrowers (primarily informal sector)
+Loan Products:
+
+Product	Amount Range	Tenure	Target Customer
+K-Express	5,000–20,000 KES	4 weeks	Mama mbogas, small kiosks
+DukaBoost	15,000–45,000 KES	6 weeks	Retail shops, saloons, barbers
+Boda Advance	10,000–60,000 KES	6 weeks	Boda boda operators
+Soko Upgrade	20,000–40,000 KES	4 weeks	Market vendors
+Group Loan	20,000–120,000 KES	6 weeks	Chamas & small enterprises
+
+Repayment Cycle: Weekly installments
+Collections: Field officers + mobile money (M-Pesa STK + paybill)
+Default Risk: 4–12% depending on region
+PAR Metrics: Typical PAR30 target: < 4%, stretch: < 2%
+
+Customer Profile Example:
+
+Kenyan Names (e.g., Mary Wanjiku Kariuki, George Otieno Odhiambo, Halima Musa Abdi)
+
+National IDs in Kenyan numbering (29xxxxxx–39xxxxxx typical ages 20–40)
+
+Occupations: hawker, boda operator, shopkeeper, saloonist, mitumba seller, mpesa agent
+
+Regions + Branches reflect authentic geography:
+
+Nairobi → Kayole, Gikomba, Kawangware, Ngara
+
+Coast → Likoni, Changamwe, Kongowea
+
+Eastern → Embu, Chuka, Meru, Kitui
+
+Central → Thika, Ruiru, Kerugoya
+
+Operational Data Model:
+
+Loan issuance averages KSh 100–150 million per month
+
+4,000–5,000 loans disbursed monthly across the network
+
+Collections done daily
+
+Branch performance measured by:
+
+Recruitments (new customers)
+
+Disbursement volume
+
+Collection rate (CR%)
+
+Arrears collected
+
+PAR
+
+Fraud Patterns (for ML model):
+
+ID mismatch or duplicate ID
+
+M-Pesa phone numbers reused across multiple borrowers
+
+High-risk branches with abnormal approval patterns
+
+High first-loan default rate
+
+Same device fingerprint used for multiple applications
+
+What AI Should Generate:
+
+12 months of realistic branch performance
+
+Daily-level granularity
+
+Loan-level detail
+
+Customer-level features (age, ID, occupation, region, risk score)
+
+Repayment behaviors (on-time, late, partial, default)
+
+Fraud flags for training XGBoost
+
+✅ THE FINAL PROMPT FOR REPLIT AGENT
+(THIS IS THE VERSION TO PASTE INTO REPLIT)
+You are upgrading an MVP Replit + Vercel application into a full operational intelligence system for Kechita Microfinance Group (KMG), a nationwide Kenyan microfinance institution.
+
+Before you begin, internalize this company profile:
+
+[COMPANY PROFILE]
+Kechita Microfinance Group (KMG) operates 100 branches across 8 Kenyan regions. 
+Loan products range from KES 5,000–60,000 with 4–6 week tenures targeting MSMEs 
+(mama mbogas, kiosks, saloonists, boda bodas, mitumba vendors). 
+Monthly disbursements total 100–150M KES. 
+PAR target is <4%, optimal <2%. 
+Fraud patterns include duplicate IDs, suspicious repayment profiles, device reuse, 
+and abnormal branch-level approval patterns. 
+Daily operational KPIs include recruitment, disbursement volume, collection rate, 
+arrears recovery, and PAR movement. 
+Customer data includes realistic Kenyan names, national IDs (29xxxxxx–39xxxxxx), 
+occupations, regional mapping, and repayment patterns.
+
+Now proceed with the following tasks:
+
+────────────────────────────────────────
+PHASE 1 — FIX DATA + REBUILD DATABASE
+────────────────────────────────────────
+I will upload 8 CSVs. 
+Three of them have corrupted date columns:
+- loans.csv
+- repayments.csv
+- daily_branch_performance.csv
+
+Automatically detect corrupted date fields and repair them, converting to ISO: YYYY-MM-DD.
+
+After repairing, generate a NEW CLEAN unified dataset that is:
+• Realistic for a Kenyan microfinance institution
+• 12 months long
+• Daily granularity
+• Includes 100 branches and 8 regions
+• Includes customer-level, loan-level, repayment-level, arrears, PAR, fraud indicators
+• Includes realistic Kenyan names, ID formats, occupations, phone numbers
+• Includes fraud signals and repayment behaviors for ML
+• Includes daily branch KPIs
+
+Then build a fully normalized PostgreSQL database schema and load all cleaned + synthetic data.
+
+────────────────────────────────────────
+PHASE 2 — AUDIT THE EXISTING MVP
+────────────────────────────────────────
+Current MVP status:
+- All 7 frontend pages built (Dashboard, Fraud Center, Branch Performance, Regional Analytics, Customer 360, Data Upload, AI Insights)
+- PostgreSQL schema with 10 tables + sample data
+- Backend API routes implemented
+- Groq keys already configured in secrets
+- XGBoost fraud + Groq multi-agent system is mocked
+- CSV upload UI built but backend logic incomplete
+- Some endpoints return mock data
+
+Your job now:
+• Scan the entire codebase
+• Identify unimplemented, incomplete, or mocked features
+• Implement missing backend logic
+• Replace stub data with real computed analytics
+• Ensure correct DB → API → UI linkage everywhere
+
+────────────────────────────────────────
+PHASE 3 — BUILD ML + MULTI-AGENT WORKFLOW
+────────────────────────────────────────
+1. Train an XGBoost fraud detection model using the cleaned data.
+   - Train until a respectable AUC is reached.
+   - Save model.joblib in /model.
+   - Build a retraining script that can run daily.
+
+2. Build a rule-based fraud engine (ID reuse, device reuse, approval spikes, abnormal branch patterns).
+
+3. Integrate Groq API as:
+   • Validation Agent — explains model decisions
+   • Insights Agent — interprets KPIs and branch performance
+   • Messaging Agent — generates CEO summaries and daily operational messages
+   • Forecast Agent — predicts end-of-month disbursements, collections, PAR
+
+4. Ensure all agents have REST endpoints + frontend UI components.
+
+────────────────────────────────────────
+PHASE 4 — UI/UX COMPLETION
+────────────────────────────────────────
+Ensure the platform includes:
+
+• Fully functional dashboard with real KPIs (not mocks)
+• Regional maps + branch rankings
+• Fraud Center with case details, model scores, and Groq explanations
+• Branch Performance charts (daily, weekly, monthly)
+• Customer 360 with loan + repayment history
+• CSV upload tool with cleaning preview
+• AI Insights Panel using Groq agents
+• Dark mode + responsive layout
+
+────────────────────────────────────────
+PHASE 5 — DEPLOYMENT
+────────────────────────────────────────
+Ensure the entire project:
+• Runs fully in Replit
+• Deploys cleanly to Vercel
+• Uses correct folder structure:
+  - /frontend (Next.js)
+  - /backend (FastAPI or Node API)
+  - /model (XGBoost)
+  - /agents (Groq integrations)
+  - /database (migrations + schema)
+  - /scripts (daily retraining, ETL)
+  - /public
+
+Test full deployment on both platforms.
+
+After building, run a full system check:
+• Validate DB connections
+• Confirm all agents respond
+• Verify real data flows through all dashboards
+• Ensure fraud model scores appear in UI
+• Replace any placeholder responses
+
+────────────────────────────────────────
+
+BEGIN NOW.

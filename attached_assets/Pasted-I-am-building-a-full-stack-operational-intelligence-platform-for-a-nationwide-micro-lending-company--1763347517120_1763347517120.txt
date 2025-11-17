@@ -1,0 +1,110 @@
+I am building a full-stack operational intelligence platform for a nationwide micro-lending company with 8 regions and ~100+ branches. I will upload 8 CSV files. Three of them (loans.csv, repayments.csv, daily_branch_performance.csv) have corrupted date columns, so you must automatically detect and clean ONLY the date fields in those files before loading.
+
+Build the entire application end-to-end so that it runs fully inside Replit AND can deploy cleanly to Vercel.
+
+────────────────────────────────────────
+SYSTEM ARCHITECTURE (REQUIRED)
+────────────────────────────────────────
+• FRONTEND: Next.js + React + TailwindCSS (Vercel-ready)
+• BACKEND API: Python FastAPI OR Node.js (your choice; must deploy on Vercel’s serverless API routes)
+• DATABASE: PostgreSQL (Replit PostgreSQL or Supabase)
+• ML: Python (XGBoost + pandas + joblib)
+• Agents: Groq API integration for analysis, validation, and smart explanations
+• Charts: Chart.js or Recharts
+• File Upload: Drag-and-drop page in the UI
+• Data Pipeline: Clean, validate, normalize and store all CSVs
+
+Make sure folder structure separates:
+- frontend/
+- backend/
+- model/
+- agents/
+- scripts/
+- database/
+- public/
+
+────────────────────────────────────────
+CORE FEATURES TO BUILD
+────────────────────────────────────────
+
+DATA UPLOAD & CLEANING
+1. UI upload tool for 8 CSVs
+2. Auto-detect which 3 files have corrupted dates
+3. Clean and standardize dates to YYYY-MM-DD
+4. Show preview before saving
+5. Save cleaned data to PostgreSQL
+
+DASHBOARD (CEO + regional)
+• KPIs (disbursements, collection rate, arrears, PAR30/60/90)
+• Region heatmaps
+• Branch rankings
+• Real-time alerts
+• Fraud suspicion index
+
+CUSTOMER VIEW
+• Profile + limit score
+• Repayment history
+• Behavior pattern indicators
+
+BRANCH PERFORMANCE
+• Daily/Weekly/Monthly breakdown
+• Gap to target
+• Mid-month & end-month projections
+
+FRAUD CENTER
+• Rule-based anomaly detection
+• XGBoost fraud-risk model (trained once initially, then retrained daily)
+• Save baseline model.joblib into /model/
+• Groq agent validation for each suspicious case
+• Reason, factors, and recommended action
+
+MODEL TRAINING PIPELINE
+• Clean data → convert → train XGBoost → evaluate → store model.joblib
+• Daily retraining script
+• Endpoint to trigger manual retrain
+
+MULTI-AGENT WORKFLOW
+1. Analysis Agent:
+   - Reads updated DB, generates insights
+2. Fraud Agent:
+   - Runs rules + ML model
+3. Groq Validation Agent:
+   - Explains decisions, flags inconsistencies
+4. Forecasting Agent:
+   - Predicts disbursements, collections, defaults
+5. Messaging Agent:
+   - Generates CEO-ready daily summaries and branch messages
+
+────────────────────────────────────────
+REQUIRED OUTPUT
+────────────────────────────────────────
+Generate and assemble the full codebase with:
+
+1. Complete Next.js frontend (Vercel-ready)
+2. Complete backend API (Vercel serverless-ready)
+3. PostgreSQL schema + migrations
+4. Data cleaning utils for the 3 corrupted CSVs
+5. Fraud rules engine + XGBoost model trainer
+6. Multi-agent scripts (Groq integrated)
+7. Daily retraining script
+8. API endpoints for all dashboard & ML functions
+9. Web UI for:
+   - Dashboard
+   - Fraud Center
+   - Model Trainer
+   - Branch/Region performance
+   - Customer search
+   - CSV upload
+10. Instructions to run locally AND deploy to Vercel
+
+────────────────────────────────────────
+BUILD REQUIREMENTS
+────────────────────────────────────────
+• Must run in Replit without modification.
+• Must deploy to Vercel with minimal configuration.
+• No placeholders—use real code and real structure.
+• Ensure all CSVs map correctly into the database.
+• Connect frontend ↔ backend via REST.
+• Make the UI clean, professional, and responsive.
+
+Start building everything now.
