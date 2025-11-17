@@ -7,3 +7,4 @@ vite.config.ts.*
 
 # Generated datasets - use database as source of truth
 attached_assets/*.csv
+data/seed/*.csv
